@@ -15,7 +15,7 @@
                         {
                             @foreach (var item in ListaClientes)
                             {
-                                <option value="@item.IdCliente">@item.NombreCompleto</option>
+                                <option value="@item.Id">@item.NombreCompleto</option>
                             }
                         }
                     </select>
@@ -31,7 +31,7 @@
                 <div class="col-2">
                     <label>Opciones</label><br />
                     <button type="button" class="btn btn-success" @onclick="CargarFacturas">Buscar</button>
-                    <a href="/facturas/add" class="btn btn-primary">Nueva Factura</a>
+                    <a href="/facturas/add" class="btn btn-primary">Nueva</a>
                 </div>
             </div>
             <div class="row">
@@ -44,7 +44,7 @@
                                 <th>Nombre del cliente</th>
                                 <th>Fecha</th>
                                 <th>Valor Total</th>
-                                <th>Articulos</th>
+                                <th>Productos</th>
                                 <th>Utilidad</th>
                                 <th>Opciones</th>
                             </tr>
@@ -53,14 +53,14 @@
                             @foreach (var factura in ListaFacturas)
                             {
                                 <tr>
-                                    <td>@factura.NumVenta</td>
+                                    <td>@factura.Numero</td>
                                     <td>@factura.NombreCliente</td>
-                                    <td>@factura.FechaVenta.ToShortDateString()</td>
+                                    <td>@factura.Fecha.ToShortDateString()</td>
                                     <td class="text-right">@factura.Total.ToString("c2")</td>
                                     <td class="text-right">@factura.Items.Count</td>
                                     <td class="text-right">@factura.Ganancia.ToString("c2")</td>
                                     <td>
-                                        <a href="/facturas/@factura.IdVenta" class="btn btn-success">Abrir</a>
+                                        <a href="/facturas/@factura.Id" class="btn btn-success">Abrir</a>
                                         <button type="button"
                                                 @onclick="(()=>EliminarFactura(factura))"
                                                 class="btn btn-danger">
@@ -70,6 +70,7 @@
                                 </tr>
 
                             }
+
                         </tbody>
                     </table>
                 </div>
@@ -79,7 +80,7 @@
 </div>
 <ToastContainer />
 
-@inject VentasService facturaService
+@inject VentaService facturaService
 @inject ClienteService clientesService
 
 @inject IToaster toaster
@@ -124,7 +125,7 @@
             return;
         }
 
-        var res = facturaService.Eliminar(model.IdVenta);
+        var res = facturaService.Eliminar(model.Id);
         if (res.IsSuccess)
         {
             toaster.Success(res.Message, "OK");
@@ -134,6 +135,6 @@
         {
             toaster.Error(res.Message, "Error");
         }
-}
+    }
 
 }

@@ -157,7 +157,7 @@ using Sotsera.Blazor.Toaster;
         var result = materialesService.Crear(Model);
         if (result.IsSuccess)
         {
-            Model.IdMaterial = result.Code;
+            Model.Id = result.Code;
             Model.CantidadProductos = 0;
 
             ListaMateriales.Add(Model);

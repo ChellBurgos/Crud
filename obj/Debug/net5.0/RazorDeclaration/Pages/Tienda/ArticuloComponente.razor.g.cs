@@ -126,13 +126,16 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 187 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\ArticuloComponente.razor"
+#line 211 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\ArticuloComponente.razor"
        
 
     public ArticuloModel Articulo { get; set; } = new ArticuloModel();
 
     public List<CategoriaModel> ListaCategorias { get; set; }
-    public List<TallaMedidaModel> ListaTallaMedida { get; set; }
+
+    //public int IdMedida { get; set; }
+    public List<TallaModel> ListaTalla{ get; set; }
+    public List<MedidaModel> ListaMedida { get; set; }
     public List<GeneroModel> ListaGeneros { get; set; }
     public List<EtapaModel> ListaEtapas { get; set; }
     public List<MaterialModel> ListaMateriales { get; set; }
@@ -142,7 +145,8 @@ using Sotsera.Blazor.Toaster;
     protected override void OnInitialized()
     {
         ListaCategorias = categoriaService.ListaCategorias();
-        ListaTallaMedida = tallaMedidaService.ListaTallaMedida();
+        ListaTalla = tallaService.ListaTalla();
+        ListaMedida = medidaService.ListaMedidas();
         ListaGeneros = generoService.ListaGeneros();
         ListaEtapas = etapaService.ListaEtapas();
         ListaMateriales = materialService.ListaMateriales();
@@ -150,22 +154,13 @@ using Sotsera.Blazor.Toaster;
         CargarProductos();
     }
 
-    protected void CargarProductos(/*int? idCategoria = null*/)
+    protected void CargarProductos()
     {
 
 
         var result = articuloService.ListaArticulos();
         ListaArticulos = result;
 
-        //if (idCategoria == null)
-        //{
-        //ListaProductos = articuloService.ListaArticulos();
-        //    }
-        //else
-        //{
-        //    ListaProductos = articuloService.ListaArticulos(Convert.ToInt32(idCategoria));
-
-        //}
 
     }
 
@@ -177,7 +172,7 @@ using Sotsera.Blazor.Toaster;
 
         if (res.IsSuccess)
         {
-            Articulo.IdArticulo = res.Code;
+            Articulo.Id = res.Code;
 
             //var prod = (ArticuloModel)res.Objeto;
             //var prod = res.Objeto as ProductoModel;
@@ -224,7 +219,7 @@ using Sotsera.Blazor.Toaster;
             return;
         }
 
-        var res = articuloService.Eliminar(producto.IdArticulo);
+        var res = articuloService.Eliminar(producto.Id);
 
         if (res.IsSuccess)
         {
@@ -257,13 +252,13 @@ using Sotsera.Blazor.Toaster;
             return;
         }
 
-        if (string.IsNullOrEmpty(producto.PrecioCompra.ToString()))
+        if (string.IsNullOrEmpty(producto.Costo.ToString()))
         {
             toaster.Error("Debe escribir el costo del producto", "Error");
             return;
         }
 
-        if (string.IsNullOrEmpty(producto.PrecioVenta.ToString()))
+        if (string.IsNullOrEmpty(producto.Precio.ToString()))
         {
             toaster.Error("Debe escribir el precio del producto", "Error");
             return;
@@ -283,7 +278,6 @@ using Sotsera.Blazor.Toaster;
         }
     }
 
-    
 
 #line default
 #line hidden
@@ -293,8 +287,9 @@ using Sotsera.Blazor.Toaster;
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ArticuloService articuloService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private EtapasService etapaService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private MaterialesService materialService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private GenerosService generoService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private TallaMedidaService tallaMedidaService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private GeneroService generoService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MedidaService medidaService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private TallaService tallaService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CategoriasService categoriaService { get; set; }
     }
 }

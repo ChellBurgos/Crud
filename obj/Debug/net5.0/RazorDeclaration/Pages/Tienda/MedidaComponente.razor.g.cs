@@ -117,113 +117,13 @@ using Sotsera.Blazor.Toaster;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 4 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\CategoriasComponente.razor"
-           [Authorize]
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/categories")]
-    public partial class CategoriasComponente : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class MedidaComponente : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 55 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\CategoriasComponente.razor"
-       
-
-    public CategoriaModel Model { get; set; } = new CategoriaModel();
-
-    public List<CategoriaModel> ListaCategorias { get; set; } = new List<CategoriaModel>();
-
-    protected override void OnInitialized()
-    {
-        CargarCategorias();
-        //otros metodos
-    }
-
-    protected void CargarCategorias()
-    {
-        var result = categoriaService.ListaCategorias();
-        ListaCategorias = result;
-    }
-
-    protected void AgregarCategoria()
-    {
-        var result = categoriaService.Crear(Model);
-        if (result.IsSuccess)
-        {
-            Model.Id = result.Code;
-            Model.CantidadProductos = 0;
-
-            ListaCategorias.Add(Model);
-
-            Model = new CategoriaModel();
-            toaster.Success(result.Message, "OK");
-        }
-        else
-        {
-            toaster.Error(result.Message, "Error");
-        }
-
-    }
-
-
-
-    protected void ModificarCategoria(CategoriaModel categoria)
-    {
-        var result = categoriaService.Modificar(categoria);
-        if (result.IsSuccess)
-        {
-            toaster.Success(result.Message, "OK");
-        }
-        else
-        {
-            toaster.Error(result.Message, "Error");
-        }
-
-    }
-
-    protected async Task EliminarCategoria(int idCategoria)
-    {
-        var res = await swal.FireAsync(new SweetAlertOptions
-        {
-            Title = "¿Confirma que desea eliminar esta categoría?",
-            Text = "Si la elimina, no podrá recuperarla",
-            ShowConfirmButton = true,
-            ConfirmButtonText = "Si, eliminar",
-            ShowCancelButton = true,
-            CancelButtonText = "No, eliminar"
-        });
-
-        if (!res.IsConfirmed)
-        {
-            return;
-        }
-
-        var result = categoriaService.Eliminar(idCategoria);
-
-        if (result.IsSuccess)
-        {
-            CargarCategorias();
-            toaster.Success(result.Message, "OK");
-        }
-        else
-        {
-            toaster.Error(result.Message, "Error");
-        }
-    }
-
-#line default
-#line hidden
-#nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private SweetAlertService swal { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private CategoriasService categoriaService { get; set; }
     }
 }
 #pragma warning restore 1591

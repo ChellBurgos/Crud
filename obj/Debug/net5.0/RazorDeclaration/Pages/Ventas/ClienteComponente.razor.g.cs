@@ -158,7 +158,7 @@ using Sotsera.Blazor.Toaster;
         {
             toaster.Success(res.Message, "OK");
 
-            Cliente.IdCliente = res.Code;
+            Cliente.Id = res.Code;
             ListaClientes.Add(Cliente);
             Cliente = new ClienteModel();
         }
