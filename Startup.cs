@@ -41,13 +41,14 @@ namespace TiendaArtesaniasMarielos
             services.AddTransient<RolesService>();
             services.AddTransient<UsuariosService>();
             services.AddTransient<CategoriasService>();
-            services.AddTransient<TallaMedidaService>();
+            services.AddTransient<TallaService>();
             services.AddTransient<EtapasService>();
-            services.AddTransient<GenerosService>();
+            services.AddTransient<GeneroService>();
+            services.AddTransient<MedidaService>();
             services.AddTransient<MaterialesService>();
             services.AddTransient<ArticuloService>();
             services.AddTransient<ClienteService>();
-            services.AddTransient<VentasService>();
+            services.AddTransient<VentaService>();
 
             //Terceros
             services.AddSweetAlert2();

@@ -156,7 +156,7 @@ using Sotsera.Blazor.Toaster;
         var result = etapaService.Crear(Model);
         if (result.IsSuccess)
         {
-            Model.IdEtapa = result.Code;
+            Model.Id = result.Code;
             Model.CantidadArticulos = 0;
 
 

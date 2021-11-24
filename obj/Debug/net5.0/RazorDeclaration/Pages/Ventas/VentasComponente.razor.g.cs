@@ -117,7 +117,7 @@ using Sotsera.Blazor.Toaster;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/facturas/{IdVenta:int}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/facturas/{IdFactura:int}")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/facturas/add")]
     public partial class VentasComponente : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -127,11 +127,11 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 143 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\VentasComponente.razor"
+#line 161 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\VentasComponente.razor"
        
 
     [Parameter]
-    public int? IdVenta { get; set; }
+    public int? IdFactura { get; set; }
 
     public VentaModel Model { get; set; }
     public ItemFacturaModel ItemFactura { get; set; } = new ItemFacturaModel();
@@ -147,20 +147,19 @@ using Sotsera.Blazor.Toaster;
 
     protected void CargarFactura()
     {
-        if (IdVenta == null)
+        if (IdFactura == null)
         {
             Model = new VentaModel()
             {
-                IdVenta = -1,
-                FechaVenta = DateTime.Now,
-
+                Id = -1,
+                Fecha = DateTime.Now,
             };
-            ItemFactura.TDV_IdVenta = -1;
+            ItemFactura.IdVenta = -1;
         }
         else
         {
-            Model = facturaService.Factura(Convert.ToInt32(IdVenta));
-            ItemFactura.TDV_IdVenta = Convert.ToInt32(IdVenta);
+            Model = facturaService.Factura(Convert.ToInt32(IdFactura));
+            ItemFactura.IdVenta = Convert.ToInt32(IdFactura);
         }
     }
 
@@ -168,14 +167,14 @@ using Sotsera.Blazor.Toaster;
     {
         var res = new MsgResult();
 
-        if (Model.IdVenta != -1)
+        if (Model.Id == -1)
         {
             res = CrearFactura();
 
             if (res.IsSuccess)
             {
-                Model.IdVenta = res.Code;
-                ItemFactura.TDV_IdVenta = res.Code;
+                Model.Id = res.Code;
+                ItemFactura.IdVenta = res.Code;
             }
         }
         else
@@ -204,7 +203,7 @@ using Sotsera.Blazor.Toaster;
         return facturaService.Modificar(Model);
     }
 
-    protected void BuscarArticulo(ChangeEventArgs e)
+    protected void BuscarProducto(ChangeEventArgs e)
     {
         if (string.IsNullOrEmpty(e.Value.ToString()))
         {
@@ -214,20 +213,19 @@ using Sotsera.Blazor.Toaster;
         var producto = productoService.Articulo(e.Value.ToString());
         if (producto == null)
         {
-            toaster.Info("Articulo no encontrado", "Info");
+            toaster.Info("Producto no encontrado", "Info");
             return;
         }
 
         ItemFactura = new ItemFacturaModel
         {
-            TDV_IdVenta = Model.IdVenta,
-            Codigo = producto.Codigo,
-            TDV_IdArticulo = producto.IdArticulo,
-            NombreArticulo = producto.Nombre,
-            PrecioCompra = producto.PrecioCompra,
             Cantidad = 1,
-            PrecioUnidad = producto.PrecioVenta,
-
+            Costo = producto.Costo,
+            IdVenta = Model.Id,
+            IdArticulo = producto.Id,
+            NombreArticulo = producto.Nombre,
+            Precio = producto.Precio,
+            Codigo = producto.Codigo,
         };
     }
 
@@ -236,7 +234,7 @@ using Sotsera.Blazor.Toaster;
         var res = facturaService.AgregarProducto(ItemFactura);
         if (res.IsSuccess)
         {
-            ItemFactura.IdDetalleVenta = res.Code;
+            ItemFactura.Id = res.Code;
             Model.Items.Add(ItemFactura);
             ItemFactura = new ItemFacturaModel();
         }
@@ -246,7 +244,7 @@ using Sotsera.Blazor.Toaster;
         }
     }
 
-    protected void EliminarArticulo(ItemFacturaModel item)
+    protected void EliminarProducto(ItemFacturaModel item)
     {
         var res = facturaService.EliminarProducto(item);
         if (res.IsSuccess)
@@ -267,7 +265,7 @@ using Sotsera.Blazor.Toaster;
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ArticuloService productoService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ClienteService clientesService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private VentasService facturaService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private VentaService facturaService { get; set; }
     }
 }
 #pragma warning restore 1591

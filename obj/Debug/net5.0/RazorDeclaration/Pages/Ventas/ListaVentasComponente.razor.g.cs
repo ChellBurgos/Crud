@@ -126,7 +126,7 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 88 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\ListaVentasComponente.razor"
+#line 89 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\ListaVentasComponente.razor"
        
 
     public DateTime Desde { get; set; } = DateTime.Now.AddDays(-365);
@@ -166,7 +166,7 @@ using Sotsera.Blazor.Toaster;
             return;
         }
 
-        var res = facturaService.Eliminar(model.IdVenta);
+        var res = facturaService.Eliminar(model.Id);
         if (res.IsSuccess)
         {
             toaster.Success(res.Message, "OK");
@@ -176,7 +176,7 @@ using Sotsera.Blazor.Toaster;
         {
             toaster.Error(res.Message, "Error");
         }
-}
+    }
 
 
 #line default
@@ -185,7 +185,7 @@ using Sotsera.Blazor.Toaster;
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private SweetAlertService swal { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ClienteService clientesService { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private VentasService facturaService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private VentaService facturaService { get; set; }
     }
 }
 #pragma warning restore 1591

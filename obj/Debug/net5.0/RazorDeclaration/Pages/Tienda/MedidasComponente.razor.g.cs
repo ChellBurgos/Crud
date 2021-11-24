@@ -118,14 +118,14 @@ using Sotsera.Blazor.Toaster;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\TallaMedidaComponente.razor"
+#line 3 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\MedidasComponente.razor"
            [Authorize]
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/tallaMedida")]
-    public partial class TallaMedidaComponente : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/medidas")]
+    public partial class MedidasComponente : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -133,37 +133,37 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\TallaMedidaComponente.razor"
+#line 53 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\MedidasComponente.razor"
        
-    public TallaMedidaModel Model { get; set; } = new TallaMedidaModel();
+    public MedidaModel Model { get; set; } = new MedidaModel();
 
-    public List<TallaMedidaModel> ListaTallaMedida { get; set; } = new List<TallaMedidaModel>();
+    public List<MedidaModel> ListaMedidas { get; set; } = new List<MedidaModel>();
 
     protected override void OnInitialized()
     {
-        CargarTallaMedida();
+        CargarMedida();
         //otros metodos
     }
 
-    protected void CargarTallaMedida()
+    protected void CargarMedida()
     {
-        var result = tallaMedidaService.ListaTallaMedida();
-        ListaTallaMedida = result;
+        var result = medidaService.ListaMedidas();
+        ListaMedidas = result;
     }
 
-    protected void AgregarTallaMedida()
+    protected void AgregarMedida()
     {
-        var result = tallaMedidaService.Crear(Model);
+        var result = medidaService.Crear(Model);
         if (result.IsSuccess)
         {
-            Model.IdTalla_Medida = result.Code;
+            Model.Id = result.Code;
             Model.CantidadArticulos = 0;
 
 
 
-            ListaTallaMedida.Add(Model);
+            ListaMedidas.Add(Model);
 
-            Model = new TallaMedidaModel();
+            Model = new MedidaModel();
             toaster.Success(result.Message, "OK");
         }
         else
@@ -173,9 +173,9 @@ using Sotsera.Blazor.Toaster;
 
     }
 
-    protected void ModificarTallaMedida(TallaMedidaModel tallaMedida)
+    protected void ModificarMedida(MedidaModel etapa)
     {
-        var result = tallaMedidaService.Modificar(tallaMedida);
+        var result = medidaService.Modificar(etapa);
         if (result.IsSuccess)
         {
             toaster.Success(result.Message, "OK");
@@ -187,7 +187,7 @@ using Sotsera.Blazor.Toaster;
 
     }
 
-    protected async Task EliminarTallaMedida(int idtallaMedida)
+    protected async Task EliminarMedida(int idmedida)
     {
         var res = await swal.FireAsync(new SweetAlertOptions
         {
@@ -204,11 +204,11 @@ using Sotsera.Blazor.Toaster;
             return;
         }
 
-        var result = tallaMedidaService.Eliminar(idtallaMedida);
+        var result = medidaService.Eliminar(idmedida);
 
         if (result.IsSuccess)
         {
-            CargarTallaMedida();
+            CargarMedida();
             toaster.Success(result.Message, "OK");
         }
         else
@@ -224,7 +224,7 @@ using Sotsera.Blazor.Toaster;
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private SweetAlertService swal { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private TallaMedidaService tallaMedidaService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private MedidaService medidaService { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -65,8 +65,8 @@
                                 <th>Direccion</th>
                                 <th>Telefono</th>
                                 <th>Email</th>
-                                @*<th>Compras</th>
-                                <th>Utilidad</th>*@
+                                <th>Compras</th>
+                                <th>Utilidad</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -98,7 +98,7 @@
                                             <i class="fa fa-save"></i>
                                         </button>
                                         <button class="btn btn-danger"
-                                                @onclick="(()=>EliminarCliente(item.IdCliente))">
+                                                @onclick="(()=>EliminarCliente(item.Id))">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -142,7 +142,7 @@
         {
             toaster.Success(res.Message, "OK");
 
-            Cliente.IdCliente = res.Code;
+            Cliente.Id = res.Code;
             ListaClientes.Add(Cliente);
             Cliente = new ClienteModel();
         }

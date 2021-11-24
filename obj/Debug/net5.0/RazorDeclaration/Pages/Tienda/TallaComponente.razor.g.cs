@@ -118,14 +118,14 @@ using Sotsera.Blazor.Toaster;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\GeneroComponente.razor"
+#line 3 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\TallaComponente.razor"
            [Authorize]
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/genero")]
-    public partial class GeneroComponente : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/tallas")]
+    public partial class TallaComponente : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -133,37 +133,37 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\GeneroComponente.razor"
+#line 53 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Tienda\TallaComponente.razor"
        
-    public GeneroModel Model { get; set; } = new GeneroModel();
+    public TallaModel Model { get; set; } = new TallaModel();
 
-    public List<GeneroModel> ListaGeneros { get; set; } = new List<GeneroModel>();
+    public List<TallaModel> ListaTalla { get; set; } = new List<TallaModel>();
 
     protected override void OnInitialized()
     {
-        CargarGenero();
+        CargarTalla();
         //otros metodos
     }
 
-    protected void CargarGenero()
+    protected void CargarTalla()
     {
-        var result = generoService.ListaGeneros();
-        ListaGeneros = result;
+        var result = tallasService.ListaTalla();
+        ListaTalla = result;
     }
 
-    protected void AgregarGenero()
+    protected void AgregarTalla()
     {
-        var result = generoService.Crear(Model);
+        var result = tallasService.Crear(Model);
         if (result.IsSuccess)
         {
-            Model.IdGenero = result.Code;
+            Model.Id = result.Code;
             Model.CantidadArticulos = 0;
 
 
 
-            ListaGeneros.Add(Model);
+            ListaTalla.Add(Model);
 
-            Model = new GeneroModel();
+            Model = new TallaModel();
             toaster.Success(result.Message, "OK");
         }
         else
@@ -173,9 +173,9 @@ using Sotsera.Blazor.Toaster;
 
     }
 
-    protected void ModificarGenero(GeneroModel etapa)
+    protected void ModificarTalla(TallaModel tallaMedida)
     {
-        var result = generoService.Modificar(etapa);
+        var result = tallasService.Modificar(tallaMedida);
         if (result.IsSuccess)
         {
             toaster.Success(result.Message, "OK");
@@ -187,11 +187,11 @@ using Sotsera.Blazor.Toaster;
 
     }
 
-    protected async Task EliminarGenero(int idetapa)
+    protected async Task EliminarTalla(int idtalla)
     {
         var res = await swal.FireAsync(new SweetAlertOptions
         {
-            Title = "¿Confirma que desea eliminar este dato?",
+            Title = "¿Confirma que desea eliminar esta talla?",
             Text = "Si la elimina, no podrá recuperarlo",
             ShowConfirmButton = true,
             ConfirmButtonText = "Si, eliminar",
@@ -204,11 +204,11 @@ using Sotsera.Blazor.Toaster;
             return;
         }
 
-        var result = generoService.Eliminar(idetapa);
+        var result = tallasService.Eliminar(idtalla);
 
         if (result.IsSuccess)
         {
-            CargarGenero();
+            CargarTalla();
             toaster.Success(result.Message, "OK");
         }
         else
@@ -224,7 +224,7 @@ using Sotsera.Blazor.Toaster;
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private SweetAlertService swal { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private GenerosService generoService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private TallaService tallasService { get; set; }
     }
 }
 #pragma warning restore 1591

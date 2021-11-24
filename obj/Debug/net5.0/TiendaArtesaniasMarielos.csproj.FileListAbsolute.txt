@@ -491,9 +491,7 @@ C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Page
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\ArticuloComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\CategoriasComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\EtapaComponente.razor.g.cs
-C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\GeneroComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\MaterialComponente.razor.g.cs
-C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\TallaMedidaComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Shared\PathNotFound.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -511,9 +509,7 @@ C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\RecoverPa
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\ArticuloComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\CategoriasComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\EtapaComponente.razor.g.cs
-C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\GeneroComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\MaterialComponente.razor.g.cs
-C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\TallaMedidaComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Shared\PathNotFound.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
@@ -538,6 +534,10 @@ C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\TiendaArtesaniasMarie
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\TiendaArtesaniasMarielos.genruntimeconfig.cache
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Ventas\ClienteComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Ventas\ClienteComponente.razor.g.cs
+C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\TallaComponente.razor.g.cs
+C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\TallaComponente.razor.g.cs
+C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Tienda\MedidasComponente.razor.g.cs
+C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Tienda\MedidasComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Ventas\ListaVentasComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\RazorDeclaration\Pages\Ventas\VentasComponente.razor.g.cs
 C:\Users\burgo\OneDrive\Pictures\Proyecto\obj\Debug\net5.0\Razor\Pages\Ventas\ListaVentasComponente.razor.g.cs

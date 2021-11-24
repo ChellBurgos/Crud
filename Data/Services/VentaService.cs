@@ -8,11 +8,11 @@ using TiendaArtesaniasMarielos.Data.Models;
 
 namespace TiendaArtesaniasMarielos.Data.Services
 {
-    public class VentasService
+    public class VentaService
     {
         private readonly ArtesaniasDbContext _context;
 
-        public VentasService(ArtesaniasDbContext context)
+        public VentaService(ArtesaniasDbContext context)
         {
             _context = context;
         }
@@ -22,33 +22,35 @@ namespace TiendaArtesaniasMarielos.Data.Services
 			var model = _context.TblVenta
 				.Include(x => x.Cliente)
 				.Include(x => x.DetalleVentas).ThenInclude(x => x.Articulo)
-				.Where(x => x.IdVenta == idFactura)
+				.Where(x => x.Id == idFactura)
 				.Select(x => new VentaModel
 				{
-					IdVenta = x.IdVenta,
-					NumVenta = x.NumVenta,
+					Id = x.Id,
+					Numero = x.Numero,
+					Fecha = x.Fecha,
 
 					//Cliente
-					TV_IdCliente = x.TV_IdCliente,
+					IdCliente = x.IdCliente,
 					NombreCliente = x.Cliente.Nombres + " " + x.Cliente.Apellidos,
-					FechaVenta = x.FechaVenta,
-					
+					Direccion = x.Cliente.Direccion,
+					Telefono = x.Cliente.Telefono,
+					Correo = x.Cliente.Correo,
 
 					//Items
 					Items = x.DetalleVentas
 					.Select(y => new ItemFacturaModel
 					{
-						IdDetalleVenta = y.IdDetalleVenta,
-						TDV_IdVenta = y.TDV_IdVenta,
+						Id = y.Id,
+						IdVenta = y.IdVenta,
 
-
-						//Productos
-						Codigo = y.Articulo.Codigo,
-						TDV_IdArticulo = y.TDV_IdArticulo,
-						NombreArticulo = y.Articulo.Nombre,
-						PrecioCompra = y.Costo,
+						//Productos                        
+						IdArticulo = y.IdArticulo,
+						Costo = y.Costo,
 						Cantidad = y.Cantidad,
-						PrecioUnidad = y.PrecioUnidad,
+						Precio = y.Precio,
+						Codigo = y.Articulo.Codigo,
+						NombreArticulo = y.Articulo.Nombre,
+
 
 					}).ToList()
 
@@ -58,39 +60,40 @@ namespace TiendaArtesaniasMarielos.Data.Services
 		}
 
 		public List<VentaModel> ListaFacturas(DateTime desde, DateTime hasta, int? idCliente = null)
-        {
+		{
 			var model = _context.TblVenta
 				.Include(x => x.Cliente)
 				.Include(x => x.DetalleVentas).ThenInclude(x => x.Articulo)
-				.Where(x => x.FechaVenta >= desde && x.FechaVenta <= hasta 
-				&& (x.TV_IdCliente == idCliente || idCliente ==null))
+				.Where(x => x.Fecha >= desde && x.Fecha <= hasta
+				&& (x.IdCliente == idCliente || idCliente == null))
 
 				.Select(x => new VentaModel
 				{
-					IdVenta = x.IdVenta,
-					NumVenta = x.NumVenta,
+					Id = x.Id,
+					Numero = x.Numero,
+					Fecha = x.Fecha,
 
 					//Cliente
-					TV_IdCliente = x.TV_IdCliente,
+					IdCliente = x.IdCliente,
 					NombreCliente = x.Cliente.Nombres + " " + x.Cliente.Apellidos,
-					FechaVenta = x.FechaVenta,
-
+					Direccion = x.Cliente.Direccion,
+					Telefono = x.Cliente.Telefono,
+					Correo = x.Cliente.Correo,
 
 					//Items
 					Items = x.DetalleVentas
 					.Select(y => new ItemFacturaModel
 					{
-						IdDetalleVenta = y.IdDetalleVenta,
-						TDV_IdVenta = y.TDV_IdVenta,
-
+						Id = y.Id,
+						IdVenta= y.IdVenta,
 
 						//Productos
-						Codigo = y.Articulo.Codigo,
-						TDV_IdArticulo = y.TDV_IdArticulo,
-						NombreArticulo = y.Articulo.Nombre,
-						PrecioCompra = y.Costo,
+						IdArticulo = y.IdArticulo,
+						Costo = y.Costo,
 						Cantidad = y.Cantidad,
-						PrecioUnidad = y.PrecioUnidad,
+						Precio = y.Precio,
+						Codigo = y.Articulo.Codigo,
+						NombreArticulo = y.Articulo.Nombre,
 
 					}).ToList()
 
@@ -105,29 +108,28 @@ namespace TiendaArtesaniasMarielos.Data.Services
 
 			var entity = _context.TblVenta
 				.Include(x => x.DetalleVentas)
-				.FirstOrDefault(x => x.NumVenta == model.NumVenta);
+				.FirstOrDefault(x => x.Numero == model.Numero);
 
 			if (entity != null)
 			{
 				result.IsSuccess = false;
-				result.Message = $"Ya existe una factura con el número {model.NumVenta}";
+				result.Message = $"Ya existe una factura con el número {model.Numero}";
 				return result;
 			}
 
 			entity = new Venta
 			{
-				
-				NumVenta = model.NumVenta,
-				TV_IdCliente = model.TV_IdCliente,
-				FechaVenta = model.FechaVenta,
+				Numero = model.Numero,
+				Fecha = model.Fecha,
+				IdCliente = model.IdCliente,
 				DetalleVentas = model.Items
 				.Select(x => new DetalleVenta
 				{
-					TDV_IdVenta = x.TDV_IdVenta,
-					TDV_IdArticulo = x.TDV_IdArticulo,
-					Costo = x.PrecioCompra,
+					IdVenta = x.IdVenta,
+					IdArticulo = x.IdArticulo,
+					Costo = x.Costo,
 					Cantidad = x.Cantidad,
-					PrecioUnidad = x.PrecioUnidad,
+					Precio = x.Precio,
 				}).ToList(),
 			};
 
@@ -138,7 +140,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 				_context.SaveChanges();
 				result.IsSuccess = true;
 				result.Message = "Factura creada correctamente";
-				result.Code = entity.IdVenta;
+				result.Code = entity.Id;
 			}
 			catch (Exception ex)
 			{
@@ -155,8 +157,8 @@ namespace TiendaArtesaniasMarielos.Data.Services
 			var result = new MsgResult();
 
 			var entity = _context.TblVenta
-				.Include(x=>x.DetalleVentas)
-				.FirstOrDefault(x => x.IdVenta == model.IdVenta);
+				.Include(x => x.DetalleVentas)
+				.FirstOrDefault(x => x.Id == model.Id);
 
 			if (entity == null)
 			{
@@ -165,29 +167,29 @@ namespace TiendaArtesaniasMarielos.Data.Services
 				return result;
 			}
 
-			entity.NumVenta = model.NumVenta;
-			entity.TV_IdCliente = model.TV_IdCliente;
-			entity.FechaVenta = model.FechaVenta;
+			entity.Numero = model.Numero;
+			entity.Fecha = model.Fecha;
+			entity.IdCliente = model.IdCliente;
 
-            var itemsFactura = entity.DetalleVentas.ToList();
+			var itemsFactura = entity.DetalleVentas.ToList();
 
-            foreach (var itemModel in model.Items)
-            {
-                var itemFactura = itemsFactura.FirstOrDefault(x => x.IdDetalleVenta == itemModel.IdDetalleVenta);
-                if (itemFactura != null)
-                {
-                    itemFactura.Cantidad = itemModel.Cantidad;
-                    itemFactura.PrecioUnidad = itemModel.PrecioUnidad;
-                }
-            }
+			foreach (var itemModel in model.Items)
+			{
+				var itemFactura = itemsFactura.FirstOrDefault(x => x.Id == itemModel.Id);
+				if (itemFactura != null)
+				{
+					itemFactura.Cantidad = itemModel.Cantidad;
+					itemFactura.Precio = itemModel.Precio;
+				}
+			}
 
 
-            try
+			try
 			{
 				_context.SaveChanges();
 				result.IsSuccess = true;
 				result.Message = "Factura guardada correctamente";
-				result.Code = entity.IdVenta;
+				result.Code = entity.Id;
 			}
 			catch (Exception ex)
 			{
@@ -198,11 +200,12 @@ namespace TiendaArtesaniasMarielos.Data.Services
 
 			return result;
 		}
+
 		public MsgResult Eliminar(int idFactura)
 		{
 			var result = new MsgResult();
 
-			var entity = _context.TblVenta.FirstOrDefault(x => x.IdVenta == idFactura);
+			var entity = _context.TblVenta.FirstOrDefault(x => x.Id == idFactura);
 
 			if (entity == null)
 			{
@@ -218,7 +221,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 				_context.SaveChanges();
 				result.IsSuccess = true;
 				result.Message = "Factura eliminada correctamente";
-				result.Code = entity.IdVenta;
+				result.Code = entity.Id;
 			}
 			catch (Exception ex)
 			{
@@ -237,7 +240,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 
 			var entity = _context.TblVenta
 				.Include(x => x.DetalleVentas)
-				.FirstOrDefault(x => x.IdVenta == model.TDV_IdArticulo);
+				.FirstOrDefault(x => x.Id == model.IdVenta);
 
 			if (entity == null)
 			{
@@ -249,12 +252,11 @@ namespace TiendaArtesaniasMarielos.Data.Services
 
 			var item = new DetalleVenta
 			{
-
-				TDV_IdVenta = model.TDV_IdVenta,
-				TDV_IdArticulo = model.TDV_IdArticulo,
-				Costo = model.PrecioCompra,
+				IdVenta = model.IdVenta,
+				IdArticulo= model.IdArticulo,
+				Costo = model.Costo,
 				Cantidad = model.Cantidad,
-				PrecioUnidad = model.PrecioUnidad,
+				Precio = model.Precio,
 			};
 
 			entity.DetalleVentas.Add(item);
@@ -264,7 +266,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 				_context.SaveChanges();
 				result.IsSuccess = true;
 				result.Message = "Elemento agregado correctamente";
-				result.Code = item.IdDetalleVenta;
+				result.Code = item.Id;
 			}
 			catch (Exception ex)
 			{
@@ -282,7 +284,8 @@ namespace TiendaArtesaniasMarielos.Data.Services
 		{
 			var result = new MsgResult();
 
-			var entity = _context.TblDetalleVenta.FirstOrDefault(x => x.IdDetalleVenta == model.IdDetalleVenta);
+			var entity = _context.TblDetalleVenta
+				.FirstOrDefault(x => x.Id == model.Id);
 
 			if (entity == null)
 			{
@@ -310,6 +313,5 @@ namespace TiendaArtesaniasMarielos.Data.Services
 			return result;
 
 		}
-
 	}
 }
