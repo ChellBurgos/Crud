@@ -124,7 +124,7 @@ using Sotsera.Blazor.Toaster;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/categories")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/categorias")]
     public partial class CategoriasComponente : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

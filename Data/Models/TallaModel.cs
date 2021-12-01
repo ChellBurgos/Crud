@@ -8,7 +8,7 @@ namespace TiendaArtesaniasMarielos.Data.Models
     public class TallaModel
     {
         public int Id { get; set; }
-        public int Nombre_Talla { get; set; }
+        public string Nombre_Talla { get; set; }
         public int? CantidadArticulos { get; set; }
     }
 }

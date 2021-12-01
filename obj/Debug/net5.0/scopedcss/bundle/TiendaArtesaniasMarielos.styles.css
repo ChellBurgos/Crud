@@ -3,6 +3,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
 }
 
 .main[b-bbqsljxh4b] {
@@ -10,7 +11,8 @@
 }
 
 .sidebar[b-bbqsljxh4b] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color:#0A2558;
+    color: white;
 }
 
 .top-row[b-bbqsljxh4b] {
@@ -70,18 +72,20 @@
     }
 }
 /* _content/TiendaArtesaniasMarielos/Shared/NavMenu.razor.rz.scp.css */
+
 .navbar-toggler[b-zw3jrgfpip] {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 .top-row[b-zw3jrgfpip] {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #0A2558;
 }
 
 .navbar-brand[b-zw3jrgfpip] {
     font-size: 1.1rem;
 }
+
 
 .oi[b-zw3jrgfpip] {
     width: 2rem;
@@ -112,15 +116,16 @@
         line-height: 3rem;
     }
 
-.nav-item[b-zw3jrgfpip]  a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-}
+        .nav-item[b-zw3jrgfpip]  a.active {
+            background-color: rgba(255,255,255,0.25);
+            color: white;
+        }
 
-.nav-item[b-zw3jrgfpip]  a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+        .nav-item[b-zw3jrgfpip]  a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
 
 @media (min-width: 641px) {
     .navbar-toggler[b-zw3jrgfpip] {

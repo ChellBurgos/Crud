@@ -96,7 +96,7 @@ namespace TiendaArtesaniasMarielos.Data
             roles.Property(x => x.IdRol).ValueGeneratedOnAdd();
             roles.HasMany(x => x.Usuarios)
                      .WithOne(x => x.Rol)
-                     .HasForeignKey(x => x.TU_IdRol);
+                     .HasForeignKey(x => x.IdRol);
 
 
             //Articulos
@@ -124,8 +124,8 @@ namespace TiendaArtesaniasMarielos.Data
 
             //Usuarios
             var usuarios = modelBuilder.Entity<Usuario>();
-            usuarios.HasKey(x => x.IdUsuario);
-            usuarios.Property(x => x.IdUsuario).ValueGeneratedOnAdd();
+            usuarios.HasKey(x => x.Id);
+            usuarios.Property(x => x.Id).ValueGeneratedOnAdd();
         }
     }
 }

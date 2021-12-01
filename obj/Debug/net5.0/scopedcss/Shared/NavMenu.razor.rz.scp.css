@@ -1,15 +1,17 @@
+
 .navbar-toggler[b-zw3jrgfpip] {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 .top-row[b-zw3jrgfpip] {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #0A2558;
 }
 
 .navbar-brand[b-zw3jrgfpip] {
     font-size: 1.1rem;
 }
+
 
 .oi[b-zw3jrgfpip] {
     width: 2rem;
@@ -40,15 +42,16 @@
         line-height: 3rem;
     }
 
-.nav-item[b-zw3jrgfpip]  a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-}
+        .nav-item[b-zw3jrgfpip]  a.active {
+            background-color: rgba(255,255,255,0.25);
+            color: white;
+        }
 
-.nav-item[b-zw3jrgfpip]  a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+        .nav-item[b-zw3jrgfpip]  a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
 
 @media (min-width: 641px) {
     .navbar-toggler[b-zw3jrgfpip] {

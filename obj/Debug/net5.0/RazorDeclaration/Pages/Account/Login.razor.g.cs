@@ -126,7 +126,7 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 79 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Account\Login.razor"
+#line 61 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Account\Login.razor"
        
 
     public LoginUsuarioModel Model { get; set; } = new LoginUsuarioModel();

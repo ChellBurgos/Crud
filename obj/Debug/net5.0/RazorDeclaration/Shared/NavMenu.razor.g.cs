@@ -125,7 +125,7 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 33 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Shared\NavMenu.razor"
+#line 54 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

@@ -127,7 +127,7 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 161 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\VentasComponente.razor"
+#line 170 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Ventas\VentasComponente.razor"
        
 
     [Parameter]
@@ -226,11 +226,14 @@ using Sotsera.Blazor.Toaster;
             NombreArticulo = producto.Nombre,
             Precio = producto.Precio,
             Codigo = producto.Codigo,
+            Stock = producto.Stock,
         };
     }
 
     protected void AgregarItemFactura()
     {
+
+
         var res = facturaService.AgregarProducto(ItemFactura);
         if (res.IsSuccess)
         {
@@ -244,8 +247,23 @@ using Sotsera.Blazor.Toaster;
         }
     }
 
-    protected void EliminarProducto(ItemFacturaModel item)
+    protected async Task EliminarProducto(ItemFacturaModel item)
     {
+        var confirm = await swal.FireAsync(new SweetAlertOptions
+        {
+            Title = "¿Confirma que desea eliminar este articulo de la factura?",
+            Text = "No podrá revertir esta operación",
+            ShowConfirmButton = true,
+            ShowCancelButton = true,
+            ConfirmButtonText = "Si, eliminar",
+            CancelButtonText = "Cancelar"
+        });
+
+        if (!confirm.IsConfirmed)
+        {
+            return;
+        }
+
         var res = facturaService.EliminarProducto(item);
         if (res.IsSuccess)
         {
@@ -263,6 +281,7 @@ using Sotsera.Blazor.Toaster;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToaster toaster { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private SweetAlertService swal { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ArticuloService productoService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ClienteService clientesService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private VentaService facturaService { get; set; }

@@ -126,14 +126,14 @@ using Sotsera.Blazor.Toaster;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 96 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Account\Register.razor"
+#line 87 "C:\Users\burgo\OneDrive\Pictures\Proyecto\Pages\Account\Register.razor"
        
 
     public bool MostrarMensaje { get; set; } = false;
 
     public Usuario Model { get; set; } = new Usuario
     {
-      TU_IdRol = 1,
+      IdRol = 1,
     };
 
     protected async void Registrar()

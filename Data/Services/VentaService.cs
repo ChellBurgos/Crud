@@ -50,6 +50,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 						Precio = y.Precio,
 						Codigo = y.Articulo.Codigo,
 						NombreArticulo = y.Articulo.Nombre,
+						Stock = y.Articulo.Stock,
 
 
 					}).ToList()
@@ -85,7 +86,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 					.Select(y => new ItemFacturaModel
 					{
 						Id = y.Id,
-						IdVenta= y.IdVenta,
+						IdVenta = y.IdVenta,
 
 						//Productos
 						IdArticulo = y.IdArticulo,
@@ -94,6 +95,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 						Precio = y.Precio,
 						Codigo = y.Articulo.Codigo,
 						NombreArticulo = y.Articulo.Nombre,
+						Stock = y.Articulo.Stock,
 
 					}).ToList()
 
@@ -130,6 +132,7 @@ namespace TiendaArtesaniasMarielos.Data.Services
 					Costo = x.Costo,
 					Cantidad = x.Cantidad,
 					Precio = x.Precio,
+
 				}).ToList(),
 			};
 

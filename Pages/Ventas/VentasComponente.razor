@@ -64,7 +64,7 @@
                 <div class="row mb-3">
                     <div class="col-md-2">
                         <label>Buscar</label>
-                        <input type="text" class="form-control" @onchange="BuscarProducto" />
+                        <input class="form-control" @onchange="BuscarProducto" />
                     </div>
                     <div class="col-md-10">
 
@@ -72,18 +72,26 @@
                             <div class="row">
 
                                 <div class="col-md-2">
-                                    <label>Referencia</label>
+                                    <label>Codigo</label>
                                     <span class="form-control">@ItemFactura.Codigo</span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Producto</label>
                                     <span class="form-control">@ItemFactura.NombreArticulo</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Stock</label>
+                                    <span class="form-control">@ItemFactura.Stock</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Resta</label>
+                                    <span class="form-control ">@ItemFactura.Resta.ToString()</span>
                                 </div>
                                 <div class="col-md-2">
                                     <label>Cantidad</label>
                                     <input type="number" class="form-control" @bind="ItemFactura.Cantidad" />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Precio</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" @bind="ItemFactura.Precio" />
@@ -155,6 +163,7 @@
 @inject VentaService facturaService
 @inject ClienteService clientesService
 @inject ArticuloService productoService
+@inject SweetAlertService swal
 
 @inject IToaster toaster
 
@@ -256,11 +265,14 @@
             NombreArticulo = producto.Nombre,
             Precio = producto.Precio,
             Codigo = producto.Codigo,
+            Stock = producto.Stock,
         };
     }
 
     protected void AgregarItemFactura()
     {
+
+
         var res = facturaService.AgregarProducto(ItemFactura);
         if (res.IsSuccess)
         {
@@ -274,8 +286,23 @@
         }
     }
 
-    protected void EliminarProducto(ItemFacturaModel item)
+    protected async Task EliminarProducto(ItemFacturaModel item)
     {
+        var confirm = await swal.FireAsync(new SweetAlertOptions
+        {
+            Title = "¿Confirma que desea eliminar este articulo de la factura?",
+            Text = "No podrá revertir esta operación",
+            ShowConfirmButton = true,
+            ShowCancelButton = true,
+            ConfirmButtonText = "Si, eliminar",
+            CancelButtonText = "Cancelar"
+        });
+
+        if (!confirm.IsConfirmed)
+        {
+            return;
+        }
+
         var res = facturaService.EliminarProducto(item);
         if (res.IsSuccess)
         {

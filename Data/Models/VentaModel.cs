@@ -34,8 +34,13 @@ namespace TiendaArtesaniasMarielos.Data.Models
         public decimal Precio { get; set; }
         public string Codigo { get; set; }
         public string NombreArticulo { get; set; }
+        public int Stock { get; set; }
 
         public decimal Subtotal => Cantidad * Precio;
+
         public decimal Margen => (Precio - Costo) * Cantidad;
+
+        public int Resta => Stock - Cantidad;
+        
     }
 }
